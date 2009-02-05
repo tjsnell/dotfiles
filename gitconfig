@@ -1,0 +1,25 @@
+[user]
+	email = tjs@snagdata.com
+	name = Tracy Snell
+
+[alias]
+	ci = commit -a
+	co = checkout
+	st = status -a
+
+[color]
+	ui = true
+
+[diff]
+	color = auto
+	rename = copy
+
+[pager]
+	color = true
+
+[status]
+	color = auto
+
+[core]
+	excludesfile = ~/.gitignore
+

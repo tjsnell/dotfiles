@@ -35,8 +35,56 @@ setopt GLOB 			# Perform filename generation
 
 setopt NOTIFY 			# This makes the shell give immediate notice of changes in job status
 
-PATH=/usr/ucb/bin:/usr/bin:/usr/sbin:/usr/ucb/bin:/usr/jdk/latest/bin:/bin:/sbin
-PATH=/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/local/sbin:$PATH
+
+
+#-----------------------------------------------------------
+# Path fun
+#-----------------------------------------------------------
+
+# Add some directory to PATH if it really exists
+# and if it really is directory and if it is not
+# yet in PATH
+pathmunge ()
+{
+    if ! echo $PATH | /bin/egrep "(^|:)$1($|:)" > /dev/null 2>&1
+    then
+        if test -d $1
+        then
+            if [ "$2" = "after" ] ; then
+                PATH=$PATH:$1
+            else
+                PATH=$1:$PATH
+            fi
+        fi
+    fi
+}
+
+
+
+PATH=$PATH
+
+pathmunge ${HOME}/bin
+
+# Solaris fun
+pathmunge /usr/ucb/bin 
+
+pathmunge /usr/local/bin 
+pathmunge /usr/local/sbin 
+pathmunge /opt/bin after
+pathmunge /opt/local/bin after
+pathmunge /opt/local/sbin after
+
+# Find java
+pathmunge /usr/local/java/jdk/bin after
+pathmunge /usr/jdk/latest/bin after
+
+
+pathmunge /bin after
+pathmunge /sbin after
+pathmunge /usr/bin after
+pathmunge /usr/sbin after
+
+export path
 
 #-----------------------------------------------------------
 # Set my default editer
