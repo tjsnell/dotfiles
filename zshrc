@@ -61,7 +61,7 @@ fi
 alias psg='ps -aux | grep -i'			# todo - make sys adj
 
 alias find='noglob find'
-ialias grep='grep -Hn --color=always'
+alias grep='grep -Hn --color=always'
 
 # cd fun
 alias cd-='cd -'
