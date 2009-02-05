@@ -35,7 +35,7 @@ setopt GLOB 			# Perform filename generation
 
 setopt NOTIFY 			# This makes the shell give immediate notice of changes in job status
 
-PATH=/usr/ucb/bin:/usr/bin:/usr/sbin:/usr/ucb/bin:/usr/jdk/latest/bin    
+PATH=/usr/ucb/bin:/usr/bin:/usr/sbin:/usr/ucb/bin:/usr/jdk/latest/bin:/bin:/sbin
 PATH=/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/local/sbin:$PATH
 
 #-----------------------------------------------------------
