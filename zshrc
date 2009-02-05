@@ -35,7 +35,7 @@ setopt GLOB 			# Perform filename generation
 
 setopt NOTIFY 			# This makes the shell give immediate notice of changes in job status
 
-PATH=/usr/ucb/bin:/usr/bin:/usr/sbin:/usr/ucb/bin:/usr/jdk/latest/bin    
+PATH=/usr/ucb/bin:/usr/bin:/usr/sbin:/usr/ucb/bin:/usr/jdk/latest/bin:/bin:/sbin
 PATH=/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/local/sbin:$PATH
 
 #-----------------------------------------------------------
@@ -61,7 +61,7 @@ fi
 alias psg='ps -aux | grep -i'			# todo - make sys adj
 
 alias find='noglob find'
-ialias grep='grep -Hn --color=always'
+alias grep='grep -Hn --color=always'
 
 # cd fun
 alias cd-='cd -'
