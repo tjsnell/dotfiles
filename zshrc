@@ -147,5 +147,12 @@ fi
         alias l="ls $LS_OPTIONS -lA"
         alias l.="ls -d $LS_OPTIONS .[0-9a-zA-Z]*"
 
+# Colored filename-completion!!11!!!
+
+#echo $LS_COLORS
+
+ZLS_COLORS="$LS_COLORS"
+export ZLS_COLORS
+zmodload zsh/complist 2> /dev/null
 
 
