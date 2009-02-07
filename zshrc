@@ -35,7 +35,10 @@ setopt GLOB 			# Perform filename generation
 
 setopt NOTIFY 			# This makes the shell give immediate notice of changes in job status
 
+set -A watch $USER root
+export WATCHFMT='%n has %a %l %(M:from %M :)at %T.'
 
+bindkey -e 			# Emacs keybindings.
 
 #-----------------------------------------------------------
 # Path fun
