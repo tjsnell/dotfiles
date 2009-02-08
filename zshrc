@@ -18,6 +18,9 @@ HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
 
+#-----------------------------------------------------------
+# zsh options
+#-----------------------------------------------------------
 setopt append_history		# append vs overwrite history file
 setopt share_history    	# share between sessions
 setopt HIST_IGNORE_ALL_DUPS	# yep as it says
@@ -86,15 +89,13 @@ pathmunge /usr/sbin after
 
 export path
 
+
+
+
 #-----------------------------------------------------------
 # Set my default editer
 #-----------------------------------------------------------
 export EDITOR=vi
-
-# Git fun
-export GIT_AUTHOR_EMAIL="tjs@snagdata.com"
-export GIT_AUTHOR_NAME="Tracy Snell"
-export GIT_COMMITTER_EMAIL=$GIT_AUTHOR_EMAIL
 
 function ff {
 if [ $# = 1 ]; then
@@ -104,14 +105,36 @@ else
 fi
 }
 
+#-----------------------------------------------------------
+# OS Fun
+#-----------------------------------------------------------
+case $OSTYPE in
+    darwin*)
+	export GREP_OPTIONS='--color=auto '
+        LS_OPTIONS='-CFG '
+	;;
+    solaris*)
+	export GREP_OPTIONS=''
+        LS_OPTIONS='-CF '
+	;;
+    linux*)
+	export GREP_OPTIONS='--color=auto '
+        LS_OPTIONS='-CF --color=auto '
+	;;
+esac
+alias grep='grep $GREP_OPTIONS'
 
+alias ll="ls $LS_OPTIONS -l"
+alias l="ls $LS_OPTIONS -lA"
+alias l.="ls -d $LS_OPTIONS .[0-9a-zA-Z]*"
 
-alias psg='ps -aux | grep -i'			# todo - make sys adj
+alias psg='ps -auxx | grep -i'			# todo - make sys adj
 
 alias find='noglob find'
-alias grep='grep -Hn --color=always'
 
+#-----------------------------------------------------------
 # cd fun
+#-----------------------------------------------------------
 alias cd-='cd -'
 alias cd..='cd ..'
 alias cd...='cd ../..'
@@ -128,31 +151,23 @@ alias ......='cd ../../../../..'
 alias .......='cd ../../../../../..'
 
 
-#        GREP_OPTIONS="--color=auto"
-#        export GREP_OPTIONS
-        alias grep="grep $GREP_OPTIONS"
-        alias egrep="egrep $GREP_OPTIONS"
-        alias fgrep="fgrep $GREP_OPTIONS"
-        
-        LS_OPTIONS='-CFG '
-        LS_OPTIONS='-CF '
-        export LS_OPTIONS
 
-if ls -F --color=auto >&/dev/null; then
-  alias ls="ls --color=auto -F"
-else
-  alias ls="ls -F"
-fi
-        alias ll="ls $LS_OPTIONS -l"
-        alias l="ls $LS_OPTIONS -lA"
-        alias l.="ls -d $LS_OPTIONS .[0-9a-zA-Z]*"
-
+#-----------------------------------------------------------
 # Colored filename-completion!!11!!!
-
-#echo $LS_COLORS
+#-----------------------------------------------------------
 
 ZLS_COLORS="$LS_COLORS"
 export ZLS_COLORS
 zmodload zsh/complist 2> /dev/null
 
+#-----------------------------------------------------------
+# Watching for other users
+#-----------------------------------------------------------
+
+LOGCHECK=60
+WATCHFMT="[%B%t%b] %B%n%b has %a %B%l%b from %B%M%b"
+
+ROOTTEXT=%(!.-=*[ROOT ZSH]*=-.)
+ROOTPROMPTADD=%(!. .)
+ROOTTITLEADD=%(!. | .)
 
