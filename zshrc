@@ -133,6 +133,7 @@ case $OSTYPE in
 esac
 alias grep="grep $GREP_OPTIONS"
 
+alias ls="ls $LS_OPTIONS "
 alias ll='ls $LS_OPTIONS -l'
 alias l="ls $LS_OPTIONS -lA"
 alias l.="ls -d $LS_OPTIONS .[0-9a-zA-Z]*"
