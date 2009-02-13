@@ -89,6 +89,7 @@ pathmunge /bin after
 pathmunge /sbin after
 pathmunge /usr/bin after
 pathmunge /usr/sbin after
+pathmunge /usr/X11/bin after
 
 export path
 
@@ -113,16 +114,19 @@ fi
 #-----------------------------------------------------------
 case $OSTYPE in
     darwin*)
-	export GREP_OPTIONS='--color=auto '
-        LS_OPTIONS='-CFG '
+	export GREP_OPTIONS="--color=auto "
+        export LS_OPTIONS='-CFG '
+	export PSG_OPTIONS='auxx'
 	;;
     solaris*)
 	export GREP_OPTIONS=''
-        LS_OPTIONS='-CF '
+        export LS_OPTIONS='-CF '
+	export PSG_OPTIONS='-auxx'
 	;;
     linux*)
 	export GREP_OPTIONS='--color=auto '
-        LS_OPTIONS='-CF --color=auto '
+        export LS_OPTIONS='-CF --color=auto '
+	export PSG_OPTIONS='-auxx'
 	;;
 esac
 alias grep='grep $GREP_OPTIONS'
@@ -131,7 +135,7 @@ alias ll="ls $LS_OPTIONS -l"
 alias l="ls $LS_OPTIONS -lA"
 alias l.="ls -d $LS_OPTIONS .[0-9a-zA-Z]*"
 
-alias psg='ps -auxx | grep -i'			# todo - make sys adj
+alias psg='ps $PSG_OPTIONS | grep -i'			# todo - make sys adj
 
 alias find='noglob find'
 
