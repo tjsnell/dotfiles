@@ -25,6 +25,9 @@ setopt append_history		# append vs overwrite history file
 setopt share_history    	# share between sessions
 setopt HIST_IGNORE_ALL_DUPS	# yep as it says
 
+setopt EXTENDED_GLOB
+
+
 setopt no_check_jobs   		# don't warn me about bg processes when exiting
 setopt no_hup          		# and don't kill them, either
 
@@ -109,33 +112,38 @@ else
 fi
 }
 
+function fff {
+    find . | grep -i $1 | grep -i $2
+}
+
 #-----------------------------------------------------------
 # OS Fun
 #-----------------------------------------------------------
 case $OSTYPE in
     darwin*)
-	export GREP_OPTIONS="--color=auto "
+	export GREP_OPTIONS='--color=auto '
         export LS_OPTIONS='-CFG '
-	export PSG_OPTIONS='auxx'
+        export PSG_OPTIONS='auxx '
 	;;
     solaris*)
 	export GREP_OPTIONS=''
         export LS_OPTIONS='-CF '
-	export PSG_OPTIONS='-auxx'
+        export PSG_OPTIONS='-auxx '
 	;;
     linux*)
 	export GREP_OPTIONS='--color=auto '
         export LS_OPTIONS='-CF --color=auto '
-	export PSG_OPTIONS='-auxx'
+        export PSG_OPTIONS='-auxx '
 	;;
 esac
-alias grep='grep $GREP_OPTIONS'
+alias grep="grep $GREP_OPTIONS"
 
-alias ll="ls $LS_OPTIONS -l"
+alias ls="ls $LS_OPTIONS "
+alias ll='ls $LS_OPTIONS -l'
 alias l="ls $LS_OPTIONS -lA"
 alias l.="ls -d $LS_OPTIONS .[0-9a-zA-Z]*"
 
-alias psg='ps $PSG_OPTIONS | grep -i'			# todo - make sys adj
+alias psg="ps $PSG_OPTIONS | grep -i"
 
 alias find='noglob find'
 
