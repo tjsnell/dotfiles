@@ -1,0 +1,6 @@
+
+[ui]
+username = tjs
+editor = vi
+ignore = ~/.hgignore
+
