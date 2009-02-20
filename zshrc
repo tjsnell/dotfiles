@@ -75,7 +75,7 @@ PATH=$PATH
 pathmunge ${HOME}/bin
 
 # Solaris fun
-pathmunge /usr/ucb/bin 
+pathmunge /usr/ucb 
 
 pathmunge /usr/local/bin 
 pathmunge /usr/local/sbin 
