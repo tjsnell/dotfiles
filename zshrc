@@ -27,7 +27,6 @@ setopt HIST_IGNORE_ALL_DUPS	# yep as it says
 
 setopt EXTENDED_GLOB
 
-
 setopt no_check_jobs   		# don't warn me about bg processes when exiting
 setopt no_hup          		# and don't kill them, either
 
@@ -37,7 +36,6 @@ setopt AUTO_LIST 		# Automatically list choices on an ambiguous completion.
 setopt AUTO_PARAM_SLASH
 setopt AUTO_REMOVE_SLASH
 setopt GLOB 			# Perform filename generation
-
 
 setopt NOTIFY 			# This makes the shell give immediate notice of changes in job status
 
@@ -69,7 +67,6 @@ pathmunge ()
 }
 
 
-
 PATH=$PATH
 
 pathmunge ${HOME}/bin
@@ -87,15 +84,13 @@ pathmunge /opt/local/sbin after
 pathmunge /usr/local/java/jdk/bin after
 pathmunge /usr/jdk/latest/bin after
 
-
 pathmunge /bin after
 pathmunge /sbin after
 pathmunge /usr/bin after
 pathmunge /usr/sbin after
+pathmunge /usr/X11/bin after
 
 export path
-
-
 
 
 #-----------------------------------------------------------
@@ -103,6 +98,10 @@ export path
 #-----------------------------------------------------------
 export EDITOR=vi
 
+
+#-----------------------------------------------------------
+# File find functionss
+#-----------------------------------------------------------
 function ff {
 if [ $# = 1 ]; then
     find . | grep -i $*
@@ -123,6 +122,7 @@ case $OSTYPE in
 	export GREP_OPTIONS='--color=auto '
         export LS_OPTIONS='-CFG '
         export PSG_OPTIONS='auxx '
+	export TERM=xterm-color
 	;;
     solaris*)
 	export GREP_OPTIONS=''
@@ -146,6 +146,9 @@ alias psg="ps $PSG_OPTIONS | grep -i"
 
 alias find='noglob find'
 
+alias connections='netstat -ant | awk '{print $NF}' | grep -v '[a-z]' | sort | uniq -c'
+
+alias tweet='curl -s -u waz:twitter4fun -d status="$1" http://twitter.com/statuses/update.xml > /dev/null'
 #-----------------------------------------------------------
 # cd fun
 #-----------------------------------------------------------
@@ -163,8 +166,6 @@ alias ....='cd ../../..'
 alias .....='cd ../../../..'
 alias ......='cd ../../../../..'
 alias .......='cd ../../../../../..'
-
-
 
 #-----------------------------------------------------------
 # Colored filename-completion!!11!!!
@@ -196,7 +197,8 @@ zmodload zsh/complist 2> /dev/null
 #  32 green                  42 bg-green
 #  33 yellow                 43 bg-yellow
 #  34 blue                   44 bg-blue
-#  35 magenta                45 bg-magenta#  36 cyan                   46 bg-cyan
+#  35 magenta                45 bg-magenta
+#  36 cyan                   46 bg-cyan
 #  37 white                  47 bg-white
 #  39 default                49 bg-default
 
@@ -230,17 +232,17 @@ COLOR_REAL_RESET="%{"$'\e[39;49;00m'"%}"
 
 colorize()
 {
-    COLOR_p_h="%{"$'\e[32;44m'"%}"
-    COLOR_p_l="%{"$'\e[32;44m'"%}"
-    COLOR_p_y="%{"$'\e[32;44m'"%}"
+    COLOR_p_h="%{"$'\e[32;49m'"%}"
+    COLOR_p_l="%{"$'\e[32;49m'"%}"
+    COLOR_p_y="%{"$'\e[32;49m'"%}"
 
-    COLOR_p_n="%{"$'\e[35;43m'"%}"
-    COLOR_at="%{"$'\e[35;43m'"%}"
-    COLOR_p_m="%{"$'\e[35;43m'"%}"
+    COLOR_p_n="%{"$'\e[35;49m'"%}"
+    COLOR_at="%{"$'\e[35;49m'"%}"
+    COLOR_p_m="%{"$'\e[35;49m'"%}"
 
-    COLOR_WHOLEHOST="%{"$'\e[35;43m'"%}"
-    COLOR_SHORTHOST="%{"$'\e[35;43m'"%}"
-    COLOR_DOMAINHOST="%{"$'\e[35;43m'"%}"
+    COLOR_WHOLEHOST="%{"$'\e[35;49m'"%}"
+    COLOR_SHORTHOST="%{"$'\e[35;49m'"%}"
+    COLOR_DOMAINHOST="%{"$'\e[35;49m'"%}"
 
     COLOR_p_D="%{"$'\e[31;46m'"%}"
     COLOR_MY_DATE="%{"$'\e[31;46m'"%}"
@@ -254,8 +256,8 @@ colorize()
         COLOR_p_hash="${COLOR_ROOT}"
         COLOR_p_slash="${COLOR_ROOT}"
     else
-        COLOR_p_hash="%{"$'\e[01;03;33;44m'"%}"
-        COLOR_p_slash="%{"$'\e[31;43m'"%}"
+        COLOR_p_hash="%{"$'\e[01;03;33;49m'"%}"
+        COLOR_p_slash="%{"$'\e[34;49m'"%}"
     fi
 
     $LATEST_PROMPT
@@ -294,8 +296,8 @@ uncolorize()
     $LATEST_PROMPT
 }
 
-#colorize
-uncolorize
+colorize
+#uncolorize
 
 
 #-----------------------------------------------------------
