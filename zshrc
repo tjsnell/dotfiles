@@ -146,7 +146,7 @@ alias psg="ps $PSG_OPTIONS | grep -i"
 
 alias find='noglob find'
 
-alias connections='netstat -ant | awk '{print $NF}' | grep -v '[a-z]' | sort | uniq -c'
+alias connections="netstat -ant | awk '{print $NF}' | grep -v '[a-z]' | sort | uniq -c"
 
 alias tweet='curl -s -u waz:twitter4fun -d status="$1" http://twitter.com/statuses/update.xml > /dev/null'
 #-----------------------------------------------------------
