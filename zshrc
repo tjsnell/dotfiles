@@ -77,8 +77,8 @@ pathmunge /usr/ucb
 pathmunge /usr/local/bin 
 pathmunge /usr/local/sbin 
 pathmunge /opt/bin after
-pathmunge /opt/local/bin after
-pathmunge /opt/local/sbin after
+pathmunge /opt/local/bin before
+pathmunge /opt/local/sbin before
 
 # Find java
 pathmunge /usr/local/java/jdk/bin after
@@ -114,6 +114,10 @@ function fff {
     find . | grep -i $1 | grep -i $2
 }
 
+function gfind {
+    find . -exec grep -Hi $1 \{\} \;
+}
+
 #-----------------------------------------------------------
 # OS Fun
 #-----------------------------------------------------------
@@ -142,11 +146,12 @@ alias ll='ls $LS_OPTIONS -l'
 alias l="ls $LS_OPTIONS -lA"
 alias l.="ls -d $LS_OPTIONS .[0-9a-zA-Z]*"
 
-alias psg="ps $PSG_OPTIONS | grep -i"
+alias psg="ps $PSG_OPTIONS |  grep -i"
 
 alias find='noglob find'
 
 alias connections="netstat -ant | awk '{print $NF}' | grep -v '[a-z]' | sort | uniq -c"
+
 
 alias tweet='curl -s -u waz:twitter4fun -d status="$1" http://twitter.com/statuses/update.xml > /dev/null'
 #-----------------------------------------------------------
