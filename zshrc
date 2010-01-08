@@ -44,6 +44,10 @@ export WATCHFMT='%n has %a %l %(M:from %M :)at %T.'
 
 bindkey -e 			# Emacs keybindings.
 
+# History search with up and down arrow keys
+bindkey '^[[A' history-beginning-search-backward
+bindkey '^[[B' history-beginning-search-forward
+
 #-----------------------------------------------------------
 # Path fun
 #-----------------------------------------------------------
@@ -90,6 +94,8 @@ pathmunge /usr/bin after
 pathmunge /usr/sbin after
 pathmunge /usr/X11/bin after
 
+# obj-j
+pathmunge /usr/local/narwhal/bin
 export path
 
 
@@ -118,13 +124,20 @@ function gfind {
     find . -exec grep -Hi $1 \{\} \;
 }
 
+function parse_git_branch {
+ 	  ref=$(git symbolic-ref HEAD 2> /dev/null | awk -F'/' '{print $NF}')
+ 	  if [ $ref ]
+ 	    then echo "($ref)"
+ 	  fi
+ 	}
+
 #-----------------------------------------------------------
 # Dreamhost weirdness
 #-----------------------------------------------------------
-if [ $HOST = "paperboy" ]
-  bindkey '^?' backward-delete-char
-  bindkey '^[[3~' delete-char
-fi
+#if [ $HOST = "paperboy" ]
+#  bindkey '^?' backward-delete-char
+#  bindkey '^[[3~' delete-char
+#fi
 
 #-----------------------------------------------------------
 # OS Fun
