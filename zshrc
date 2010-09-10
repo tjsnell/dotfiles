@@ -87,7 +87,9 @@ pathmunge /opt/local/sbin before
 # Find java
 pathmunge /usr/local/java/jdk/bin after
 pathmunge /usr/jdk/latest/bin after
+pathmunge /usr/local/java/pax-construct-1.4/bin
 
+pathmunge /Developer/usr/bin
 pathmunge /bin after
 pathmunge /sbin after
 pathmunge /usr/bin after
@@ -104,6 +106,10 @@ export path
 #-----------------------------------------------------------
 export EDITOR=vi
 
+#-----------------------------------------------------------
+# Dev stuff
+#-----------------------------------------------------------
+export MAVEN_OPTS="-Xmx1024m -Xms512m"
 
 #-----------------------------------------------------------
 # File find functionss
@@ -122,6 +128,10 @@ function fff {
 
 function gfind {
     find . -exec grep -Hi $1 \{\} \;
+}
+
+function jfind {
+    noglob find . -name *java -exec grep -Hi $1 \{\} \;
 }
 
 function parse_git_branch {
